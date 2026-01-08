@@ -1,4 +1,4 @@
-# chastelib 
+# chastelib
 
 chastelib is a C library for managing integers in radix 2 to 36. It consists of 4 core functions:
 
@@ -9,17 +9,18 @@ strint
 
 By putting all my time into these 4 functions, documenting them, and even porting them over to other programming languages, I provided myself a standard means to manage console output for my integer sequence programs.
 
-However, the usage goes far beyond this basic purpose. All useful programs must display output to a console/terminal at some point or we don't know if the code is correct.
+However, the usage goes far beyond this basic purpose. All useful programs must display output to a console/terminal at some point, or we don't know if the code is correct.
 
 In this repository, you may find slightly different variations for different programming languages, or even different dialects of the same language. Considering that there are different C and C++ standards, I often like to implement these same functions in different ways just for fun.
 
-*However, the original C source is the foundation of all these, and is the best documented*
+**However, the original C source is the foundation of all these, and is the best documented**
 
-I also have extensions planned for the far future, for example, imagine a standard way to manage file input and output. 
+I also have extensions planned for the far future, for example, imagine a standard way to manage file input and output.
 
 ## Example Usage
 
-To see why this library is special, you need an example that is easy to understand. The following is the "main.c" source file which includes chastelib.h as well as the other standard library functions.
+To see why this library is special, you need an example that is easy to understand. The following is the "main.c" source file, which includes chastelib.h as well as the other standard library functions.
+
 
 ```c
 #include <stdio.h>
@@ -66,7 +67,7 @@ int main(int argc, char *argv[])
 
 ## Example Output
 
-The following is the command that compiles and runs it followed by the actual output generated.
+The following is the command that compiles and runs it, followed by the actual output generated.
 
 ```
 gcc -Wall -ansi -pedantic main.c -o main && ./main
@@ -329,6 +330,6 @@ This is the official test program for the C version of chastelib.
 11111111 FF 255
 ```
 
-Do you see how perfectly the numbers are lined up? Because I was using a range of known numbers, I specifically set the int_width to match the highest possible number of digits needed in that base. As such the digits of each radix are perfectly lined up. Also notice that this functions as a convenient ASCII reference so that I know which number represents which character. I look at this reference all the time because the logic is essential to how the functions convert between integers and strings.
+Do you see how perfectly the numbers are lined up? Because I was using a range of known numbers, I specifically set the int_width to match the highest possible number of digits needed in that base. As such, the digits of each radix are perfectly lined up. Also, notice that this functions as a convenient ASCII reference so that I know which number represents which character. I look at this reference all the time because the logic is essential to how the functions convert between integers and strings.
 
 I plan to make videos and other tutorials on how this library works in depth. Let me know if you have any questions.
