@@ -1,0 +1,5 @@
+<map id="putint" name="putint">
+<area shape="rect" id="node1" title="print integer using global radix" alt="" coords="5,31,65,57"/>
+<area shape="rect" id="node2" href="$chastelib_8h.html#a0b100e2d8ea54bc4bc4de8dc949820ac" title="Convert an unsigned integer to a string in the current global radix." alt="" coords="125,5,181,32"/>
+<area shape="rect" id="node3" href="$chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6" title="print a strint to stdout" alt="" coords="113,56,193,83"/>
+</map>
