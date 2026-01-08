@@ -1,4 +1,4 @@
 push:
 	git add .
-	git commit -m "Chaste Hex update"
+	git commit -m "chastelib update"
 	git push
