@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
  radix=16;
  int_width=1;
 
- putstring("This is the official test program for the C version of chastelib.\n");
+ putstring("This program is the official test suite for the C version of chastelib.\n");
 
  b=strint("100");
  while(a<b)
@@ -71,7 +71,7 @@ The following is the command that compiles and runs it, followed by the actual o
 
 ```
 gcc -Wall -ansi -pedantic main.c -o main && ./main
-This is the official test program for the C version of chastelib.
+This program is the official test suite for the C version of chastelib.
 00000000 00 000
 00000001 01 001
 00000010 02 002
@@ -333,3 +333,5 @@ This is the official test program for the C version of chastelib.
 Do you see how perfectly the numbers are lined up? Because I was using a range of known numbers, I specifically set the int_width to match the highest possible number of digits needed in that base. As such, the digits of each radix are perfectly lined up. Also, notice that this functions as a convenient ASCII reference so that I know which number represents which character. I look at this reference all the time because the logic is essential to how the functions convert between integers and strings.
 
 I plan to make videos and other tutorials on how this library works in depth. Let me know if you have any questions.
+
+<https://linktr.ee/chastitywhiterose>
