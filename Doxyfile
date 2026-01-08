@@ -1,0 +1,23 @@
+# Minimal Doxyfile for chastelib
+PROJECT_NAME           = "chastelib"
+PROJECT_BRIEF          = "Small C library for integer conversions in radix 2..36"
+OUTPUT_DIRECTORY       = docs
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+GENERATE_RTF           = NO
+GENERATE_XML           = NO
+RECURSIVE              = YES
+INPUT                  = include src README.md
+FILE_PATTERNS          = *.c *.h *.hxx *.cpp *.md
+EXAMPLE_PATH           = examples
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+QUIET                  = NO
+WARNINGS               = YES
+HAVE_DOT               = YES
+DOT_IMAGE_FORMAT       = svg
+CALL_GRAPH             = YES
+INCLUDE_PATH           =
