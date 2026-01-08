@@ -19,7 +19,9 @@ I also have extensions planned for the far future, for example, imagine a standa
 
 ## Example Usage
 
-```
+To see why this library is special, you need an example that is easy to understand. The following is the "main.c" source file which includes chastelib.h as well as the other standard library functions.
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include "chastelib.h"
@@ -63,6 +65,8 @@ int main(int argc, char *argv[])
 ```
 
 ## Example Output
+
+The following is the command that compiles and runs it followed by the actual output generated.
 
 ```
 gcc -Wall -ansi -pedantic main.c -o main && ./main
@@ -324,3 +328,7 @@ This is the official test program for the C version of chastelib.
 11111110 FE 254
 11111111 FF 255
 ```
+
+Do you see how perfectly the numbers are lined up? Because I was using a range of known numbers, I specifically set the int_width to match the highest possible number of digits needed in that base. As such the digits of each radix are perfectly lined up. Also notice that this functions as a convenient ASCII reference so that I know which number represents which character. I look at this reference all the time because the logic is essential to how the functions convert between integers and strings.
+
+I plan to make videos and other tutorials on how this library works in depth. Let me know if you have any questions.
