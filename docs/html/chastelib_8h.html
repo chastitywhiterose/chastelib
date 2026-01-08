@@ -74,12 +74,7 @@ $(function() {
   <div class="headertitle"><div class="title">chastelib.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="chastelib_8h__dep__incl.svg" width="128" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-</div>
+
 <p><a href="chastelib_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -156,10 +151,11 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>pointer to a zero terminated string ready to be printed</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function does not work on negative numbers!</dd></dl>
 <p>Example: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chastelib_8h.html">chastelib.h</a>&quot;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line">{</div>
 <div class="line"> <span class="keywordtype">int</span> x;</div>
 <div class="line"> </div>
@@ -175,10 +171,9 @@ Variables</h2></td></tr>
 <div class="line"> <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 <div class="ttc" id="achastelib_8h_html"><div class="ttname"><a href="chastelib_8h.html">chastelib.h</a></div></div>
-<div class="ttc" id="achastelib_8h_html_a0b100e2d8ea54bc4bc4de8dc949820ac"><div class="ttname"><a href="chastelib_8h.html#a0b100e2d8ea54bc4bc4de8dc949820ac">intstr</a></div><div class="ttdeci">char * intstr(unsigned int i)</div><div class="ttdoc">Convert an unsigned integer to a string in the current global radix.</div><div class="ttdef"><b>Definition:</b> chastelib.h:63</div></div>
+<div class="ttc" id="achastelib_8h_html_a0b100e2d8ea54bc4bc4de8dc949820ac"><div class="ttname"><a href="chastelib_8h.html#a0b100e2d8ea54bc4bc4de8dc949820ac">intstr</a></div><div class="ttdeci">char * intstr(unsigned int i)</div><div class="ttdoc">Convert an unsigned integer to a string in the current global radix.</div><div class="ttdef"><b>Definition:</b> chastelib.h:65</div></div>
 <div class="ttc" id="achastelib_8h_html_aa059232cb80d0a918bf286acc99f4323"><div class="ttname"><a href="chastelib_8h.html#aa059232cb80d0a918bf286acc99f4323">radix</a></div><div class="ttdeci">int radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:22</div></div>
 <div class="ttc" id="achastelib_8h_html_aa1a38d42013bfd78914c9187e5b0ccdd"><div class="ttname"><a href="chastelib_8h.html#aa1a38d42013bfd78914c9187e5b0ccdd">int_width</a></div><div class="ttdeci">int int_width</div><div class="ttdef"><b>Definition:</b> chastelib.h:27</div></div>
-<div class="ttc" id="amain_8c_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> main.c:4</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -211,7 +206,7 @@ Variables</h2></td></tr>
 <div class="line"><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chastelib_8h.html">chastelib.h</a>&quot;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line">{</div>
 <div class="line"> <span class="keywordtype">int</span> a=0,b;</div>
 <div class="line"> </div>
@@ -247,9 +242,9 @@ Variables</h2></td></tr>
 <div class="line">  </div>
 <div class="line"> <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="achastelib_8h_html_a99071933052d6c0cdf0640ddd7c7f5a6"><div class="ttname"><a href="chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6">putstring</a></div><div class="ttdeci">void putstring(const char *s)</div><div class="ttdoc">print a strint to stdout</div><div class="ttdef"><b>Definition:</b> chastelib.h:106</div></div>
-<div class="ttc" id="achastelib_8h_html_acdc6a90c7aec7aa29b023155e49f92b3"><div class="ttname"><a href="chastelib_8h.html#acdc6a90c7aec7aa29b023155e49f92b3">putint</a></div><div class="ttdeci">void putint(unsigned int i)</div><div class="ttdoc">print integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:170</div></div>
-<div class="ttc" id="achastelib_8h_html_adc198a1dd63a4aaf2a0358c73c7f1140"><div class="ttname"><a href="chastelib_8h.html#adc198a1dd63a4aaf2a0358c73c7f1140">strint</a></div><div class="ttdeci">int strint(const char *s)</div><div class="ttdoc">convert string into integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:212</div></div>
+<div class="ttc" id="achastelib_8h_html_a99071933052d6c0cdf0640ddd7c7f5a6"><div class="ttname"><a href="chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6">putstring</a></div><div class="ttdeci">void putstring(const char *s)</div><div class="ttdoc">print a strint to stdout</div><div class="ttdef"><b>Definition:</b> chastelib.h:108</div></div>
+<div class="ttc" id="achastelib_8h_html_acdc6a90c7aec7aa29b023155e49f92b3"><div class="ttname"><a href="chastelib_8h.html#acdc6a90c7aec7aa29b023155e49f92b3">putint</a></div><div class="ttdeci">void putint(unsigned int i)</div><div class="ttdoc">print integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:172</div></div>
+<div class="ttc" id="achastelib_8h_html_adc198a1dd63a4aaf2a0358c73c7f1140"><div class="ttname"><a href="chastelib_8h.html#adc198a1dd63a4aaf2a0358c73c7f1140">strint</a></div><div class="ttdeci">int strint(const char *s)</div><div class="ttdoc">convert string into integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:214</div></div>
 </div><!-- fragment --> <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -286,7 +281,7 @@ Here is the call graph for this function:</div>
 <p>Example: </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chastelib_8h.html">chastelib.h</a>&quot;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line">{</div>
 <div class="line"> <a class="code hl_function" href="chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6">putstring</a>(<span class="stringliteral">&quot;Hello World\n&quot;</span>);</div>
 <div class="line"> <span class="keywordflow">return</span> 0;</div>
@@ -323,7 +318,7 @@ Here is the call graph for this function:</div>
 <div class="line"><span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="chastelib_8h.html">chastelib.h</a>&quot;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="main_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
+<div class="line"><span class="keywordtype">int</span> main(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[])</div>
 <div class="line">{</div>
 <div class="line"> <span class="keywordtype">int</span> a,b,c;</div>
 <div class="line"> </div>

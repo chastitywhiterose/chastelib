@@ -34,6 +34,8 @@ My function corrects this and in my opinion such a function should have been par
 
  @param i The integer to convert.
  @return pointer to a zero terminated string ready to be printed
+ 
+ @note This function does not work on negative numbers!
 
 Example:
  @code
