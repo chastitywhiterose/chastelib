@@ -23,7 +23,7 @@
   <td id="projectalign">
    <div id="projectname">chastelib
    </div>
-   <div id="projectbrief">Small C library for integer conversions in radix 2..36</div>
+   <div id="projectbrief">C library for input/output of integers in bases 2 to 36.</div>
   </td>
  </tr>
  </tbody>
@@ -88,7 +88,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a0b100e2d8ea54bc4bc4de8dc949820ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert an unsigned integer to a string in the current global radix.  <a href="chastelib_8h.html#a0b100e2d8ea54bc4bc4de8dc949820ac">More...</a><br /></td></tr>
 <tr class="separator:a0b100e2d8ea54bc4bc4de8dc949820ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99071933052d6c0cdf0640ddd7c7f5a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6">putstring</a> (const char *s)</td></tr>
-<tr class="memdesc:a99071933052d6c0cdf0640ddd7c7f5a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">print a strint to stdout  <a href="chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6">More...</a><br /></td></tr>
+<tr class="memdesc:a99071933052d6c0cdf0640ddd7c7f5a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">print a string to stdout  <a href="chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6">More...</a><br /></td></tr>
 <tr class="separator:a99071933052d6c0cdf0640ddd7c7f5a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acdc6a90c7aec7aa29b023155e49f92b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chastelib_8h.html#acdc6a90c7aec7aa29b023155e49f92b3">putint</a> (unsigned int i)</td></tr>
 <tr class="memdesc:acdc6a90c7aec7aa29b023155e49f92b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">print integer using global radix  <a href="chastelib_8h.html#acdc6a90c7aec7aa29b023155e49f92b3">More...</a><br /></td></tr>
@@ -242,15 +242,10 @@ Variables</h2></td></tr>
 <div class="line">  </div>
 <div class="line"> <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="achastelib_8h_html_a99071933052d6c0cdf0640ddd7c7f5a6"><div class="ttname"><a href="chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6">putstring</a></div><div class="ttdeci">void putstring(const char *s)</div><div class="ttdoc">print a strint to stdout</div><div class="ttdef"><b>Definition:</b> chastelib.h:108</div></div>
+<div class="ttc" id="achastelib_8h_html_a99071933052d6c0cdf0640ddd7c7f5a6"><div class="ttname"><a href="chastelib_8h.html#a99071933052d6c0cdf0640ddd7c7f5a6">putstring</a></div><div class="ttdeci">void putstring(const char *s)</div><div class="ttdoc">print a string to stdout</div><div class="ttdef"><b>Definition:</b> chastelib.h:108</div></div>
 <div class="ttc" id="achastelib_8h_html_acdc6a90c7aec7aa29b023155e49f92b3"><div class="ttname"><a href="chastelib_8h.html#acdc6a90c7aec7aa29b023155e49f92b3">putint</a></div><div class="ttdeci">void putint(unsigned int i)</div><div class="ttdoc">print integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:172</div></div>
 <div class="ttc" id="achastelib_8h_html_adc198a1dd63a4aaf2a0358c73c7f1140"><div class="ttname"><a href="chastelib_8h.html#adc198a1dd63a4aaf2a0358c73c7f1140">strint</a></div><div class="ttdeci">int strint(const char *s)</div><div class="ttdoc">convert string into integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:214</div></div>
-</div><!-- fragment --> <div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="chastelib_8h_acdc6a90c7aec7aa29b023155e49f92b3_cgraph.svg" width="199" height="88"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-
+</div><!-- fragment --> 
 </div>
 </div>
 <a id="a99071933052d6c0cdf0640ddd7c7f5a6" name="a99071933052d6c0cdf0640ddd7c7f5a6"></a>
@@ -269,7 +264,7 @@ Here is the call graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>print a strint to stdout </p>
+<p>print a string to stdout </p>
 <p >This function prints a string using fwrite. This is the best C representation of how my Assembly programs also work/ It's true purpose is to be used in the putint function for conveniently printing integers, but it can print any valid string.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

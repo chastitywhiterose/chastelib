@@ -2,10 +2,10 @@
 
 chastelib is a C library for managing integers in radix 2 to 36. It consists of 4 core functions:
 
-intstr
-putstring
-putint
-strint
+- intstr
+- putstring
+- putint
+- strint
 
 By putting all my time into these 4 functions, documenting them, and even porting them over to other programming languages, I provided myself a standard means to manage console output for my integer sequence programs.
 

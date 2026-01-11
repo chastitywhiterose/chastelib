@@ -80,7 +80,7 @@ char* intstr(unsigned int i)
 }
 
 /**
- @brief print a strint to stdout
+ @brief print a string to stdout
 
 
  This function prints a string using fwrite.
