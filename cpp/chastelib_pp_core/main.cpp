@@ -1,18 +1,17 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
 #include "chastelib.hpp"
 
 int main(int argc, char *argv[])
 {
  int a=0,b;
- string input="100"; // a C++ string type to test the overloaded function in the C++ version of chastelib
 
  radix=16;
  int_width=1;
 
- putstring("This program is the official test suite for the C++ version of chastelib.\n");
+ putstring("Official test suite for the C version of chastelib.\n");
 
- b=strint(input);
+ b=strint("100");
  while(a<b)
  {
   radix=2;
@@ -30,7 +29,7 @@ int main(int argc, char *argv[])
   if(a>=0x20 && a<=0x7E)
   {
    putstring(" ");
-   cout.put(a);
+   putchar(a);
   }
 
   putstring("\n");

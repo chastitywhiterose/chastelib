@@ -1,15 +1,20 @@
 /*
+ chastelib ncurses edition header file
+ 
+ Only one function in this file has been modified from the original libc version. The putstring function calls addstr from the ncurses library.
+ The other functions work exactly the same as they always did for integer conversion and output.
+
  This file is a library of functions written by Chastity White Rose. The functions are for converting strings into integers and integers into strings.
  I did it partly for future programming plans and also because it helped me learn a lot in the process about how pointers work
- as well as which features the standard library provides and which things I need to write my own functions for.
+ as well as which features the standard library provides, and which things I need to write my own functions for.
 
  As it turns out, the integer output routines for C are too limited for my tastes. This library corrects this problem.
  Using the global variables and functions in this file, integers can be output in bases/radixes 2 to 36
 */
 
 /*
- These two lines define a static array with a size big enough to store the digits of an integer including padding it with extra zeroes.
- The integer conversion function always references a pointer to this global string and this allows other standard library functions
+ These two lines define a static array with a size big enough to store the digits of an integer, including padding it with extra zeroes.
+ The integer conversion function always references a pointer to this global string, and this allows other standard library functions
  such as printf to display the integers to standard output or even possibly to files.
 */
 
@@ -22,8 +27,9 @@ int radix=2;
 int int_width=1;
 
 /*
-This function is one that I wrote because the standard library can display integers as decimai, octai, or hexadecimal but not any other bases(including binary which is my favorite).
-My function corrects this and in my opinion such a function should have been part of the standard library but I'm not complaining because now I have my own which I can use forever!
+This function is one that I wrote because the standard library can display integers as decimal, octal, or hexadecimal, but not any other bases(including binary, which is my favorite).
+My function corrects this, and in my opinion, such a function should have been part of the standard library, but I'm not complaining because now I have my own, which I can use forever!
+More importantly, it can be adapted for any programming language in the world if I learn the basics of that language.
 */
 
 char *intstr(unsigned int i)
@@ -44,23 +50,20 @@ char *intstr(unsigned int i)
 }
 
 /*
- This function prints a string using fwrite.
- This is the best C representation of how my Assembly programs also work/
- It's true purpose is to be used in the putint function for conveniently printing integers, 
- but it can print any valid string.
+ This version of the putstring function simply passes the char pointer to addstr, the ncurses equivalent function.
+ Calling putstring rather than addstring allows me to port over C programs that have already used the libc version of chastelib
+ This way, only the putstring function needs to be modified in this library.
 */
 
 void putstring(const char *s)
 {
- int c=0;
- const char *p=s;
- while(*p++){c++;} 
- fwrite(s,1,c,stdout);
+ addstr(s);
 }
 
 /*
- This function uses both intstr and putstring to print an integer in the currently selected radix and width
+ This function uses both intstr and putstring to print an integer in the currently selected radix and width.
 */
+
 void putint(unsigned int i)
 {
  putstring(intstr(i));
@@ -69,8 +72,8 @@ void putint(unsigned int i)
 /*
  This function is my own replacement for the strtol function from the C standard library.
  I didn't technically need to make this function because the functions from stdlib.h can already convert strings from bases 2 to 36 into integers.
- However my function is simpler because it only requires 2 arguments instead of three and it also does not handle negative numbers.
- Never have I needed negative integers but if I ever do I can use the standard functions or write my own in the future.
+ However, my function is simpler because it only requires 2 arguments instead of three, and it also does not handle negative numbers.
+I have never needed negative integers, but if I ever do, I can use the standard functions or write my own in the future.
 */
 
 int strint(const char *s)
@@ -98,5 +101,9 @@ int strint(const char *s)
 /*
  Those four functions above are the core of chastelib.
  While there may be extensions written for specific programs, these functions are essential for absolutely every program I write.
+ 
  The only reason you would not need them is if you only output numbers in decimal or hexadecimal, because printf in C can do all that just fine.
+ However, the reason my core functions are superior to printf is that printf and its family of functions require the user to memorize all the arcane symbols for format specifiers.
+ 
+ The core functions are primarily concerned with standard output and the conversion of strings and integers. They do not deal with input from the keyboard or files. A separate extension will be written for my programs that need these features.
 */

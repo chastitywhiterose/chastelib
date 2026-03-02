@@ -1,6 +1,6 @@
-#include <iostream>
-using namespace std;
-#include "chastelib.hpp"
+#include <stdio.h>
+#include <stdlib.h>
+#include "chastelib.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
  radix=16;
  int_width=1;
 
- putstring("This program is the official test suite for the C++ version of chastelib.\n");
+ putstring("Official test suite for the C version of chastelib.\n");
 
  b=strint("100");
  while(a<b)
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
   if(a>=0x20 && a<=0x7E)
   {
    putstring(" ");
-   cout.put(a);
+   putchar(a);
   }
 
   putstring("\n");
@@ -38,3 +38,4 @@ int main(int argc, char *argv[])
   
  return 0;
 }
+
