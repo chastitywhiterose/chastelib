@@ -17,7 +17,7 @@
  and send them to cout for perfectly formatted integers in my style!
  Because C++ allows strings to be returned from a function
  and since all data is passed as arguments. No global variables are needed.
- Th intstr function can be called in any context at any time!
+ The intstr function can be called in any context at any time!
 */
 
 string intstr(unsigned int i,int radix,int int_width)
@@ -38,11 +38,11 @@ string intstr(unsigned int i,int radix,int int_width)
 }
 
 
+
 /*
  This function is an overloaded function for C++ style strings.
  Just like the other strint function it converts an string to an integer
  But it works with the std::string class, it allows compatibility with modern C++ programs that use this type.
- The characters of the string class can be indexed with [] just like C strings
  The compiler is smart enough to know when this function is being called
  because a string object is not the same as a char pointer
 */
