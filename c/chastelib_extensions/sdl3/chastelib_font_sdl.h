@@ -35,10 +35,10 @@ struct chaste_font chaste_font_load(char *s)
  temp_surface=SDL_LoadBMP(s);
 
  /*convert to same surface as screen for faster blitting*/
- new_font.surface=SDL_ConvertSurface(temp_surface, surface->format, 0);
+ new_font.surface=SDL_ConvertSurface(temp_surface, surface->format);
  
  /*free the temp surface*/
- SDL_FreeSurface(temp_surface); 
+ SDL_DestroySurface(temp_surface); 
 
  if(new_font.surface==NULL){printf( "SDL could not load image! SDL_Error: %s\n",SDL_GetError());return new_font;}
 
@@ -72,10 +72,7 @@ int line_spacing_pixels=1; /*optionally space lines of text by this many pixels*
 
 /*
 This function is designed to print a single character to the current surface of the main window
-This means that it can be called repeatedly to write entire strings of text.
-This version copies the characters with direct blitting.
-This means that the color cannot be modified by the program
-and will be white text on a black background at all times.
+This means that it can be called repeatedly to write entire strings of text
 */
 
 int sdl_putchar_blit(char c)
@@ -110,22 +107,33 @@ int sdl_putchar_blit(char c)
    rect_dest.h=main_font.char_height*main_font.char_scale;
 
    /*copy the character to the screen (including scale of character)*/
-   error=SDL_BlitScaled(main_font.surface,&rect_source,surface,&rect_dest);
-   if(error){printf("Error: %s\n",SDL_GetError());}
+   error=SDL_BlitSurfaceScaled(main_font.surface,&rect_source,surface,&rect_dest,SDL_SCALEMODE_NEAREST);
+   if(!error){printf("Error: %s\n",SDL_GetError());}
    
    /*
    copy the character directly but ignore scale
    this will result in the tiny character from the source font
    and is only intended as a joke
    */
-   /*error=SDL_BlitSurface(main_font.surface,&rect_source,surface,&rect_dest);
-   if(error){printf("Error: %s\n",SDL_GetError());}*/
+   /*error=SDL_BlitSurface(main_font.surface,&rect_source,surface,&rect_dest);*/
+   if(!error){printf("Error: %s\n",SDL_GetError());}
 
    cursor_x+=main_font.char_width*main_font.char_scale;
   }
 
  return c;
 }
+
+/*
+SDL3 notes:
+
+In the SDL_BlitSurfaceScaled function, the final argument is what method is used for scaling.
+https://wiki.libsdl.org/SDL3/SDL_ScaleMode
+
+SDL_SCALEMODE_LINEAR makes everything look blurry. I don't like it!
+SDL_SCALEMODE_NEAREST makes it look correct like in SDL2
+
+*/
 
 /*
 This function is designed to print a single character to the current surface of the main window
@@ -236,6 +244,7 @@ int sdl_putchar_pixel(char c) /*direct pixel access edition for SDL2*/
 
 int (*sdl_putchar)(char )=sdl_putchar_pixel;
 
+
 /*
  This function is the SDL equivalent of my putstring function.
  Besides writing the text to an SDL window, it still writes it to the terminal
@@ -299,7 +308,7 @@ This makes sense because the Linux clear command does the same thing
 void sdl_clear()
 {
  cursor_x=0;cursor_y=0;
- SDL_FillRect(surface,NULL,0x000000);
+ SDL_FillSurfaceRect(surface,NULL,0x000000);
  
  /*
  these next lines use escape sequences to also clear the terminal
@@ -323,11 +332,12 @@ void sdl_wait_escape()
  {
   while(SDL_PollEvent(&e))
   {
-   if(e.type == SDL_QUIT){loop=0;}
-   if(e.type == SDL_KEYUP)
+   if(e.type == SDL_EVENT_QUIT){loop=0;}
+   if(e.type == SDL_EVENT_KEY_UP)
    {
-    if(e.key.keysym.sym==SDLK_ESCAPE){loop=0;}
+    if(e.key.key==SDLK_ESCAPE){loop=0;}
    }
   }
  }
 }
+
