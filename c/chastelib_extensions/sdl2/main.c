@@ -20,6 +20,7 @@ because it depends on them.
 #include "chastelib_format_pbm_sdl2.h"
 #include "chastelib_font_sdl2.h"
 #include "chastelib_demo_sdl2.h"
+#include "chastelib_demo_sdl2_extra.h"
 
 int main(int argc, char **argv)
 {
@@ -57,7 +58,7 @@ int main(int argc, char **argv)
 
  if(0)
  {
-    /*clear the screen before we begin writing*/
+  sdl_clear();  /*clear the screen before we begin writing*/
   x=putstr("Hello World\n"); /*draw a string of text to the surface*/
   putstr("string length = ");
   radix=10;
@@ -66,9 +67,13 @@ int main(int argc, char **argv)
   SDL_UpdateWindowSurface(window); /*update window to show the results*/
   sdl_wait_escape(); /*wait till escape key pressed*/
  }
+ 
+  demo_galatians();
 
  /*now call a demo function I wrote*/
  sdl_chastelib_test_suite();
+ 
+
 
  if(0)
  {
