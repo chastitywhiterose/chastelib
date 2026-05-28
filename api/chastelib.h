@@ -62,21 +62,21 @@ int main(int argc, char *argv[])
 
 */
 
-char* intstr(unsigned int i)
+char *intstr(unsigned int i)    /*Chastity's supreme integer to string conversion function*/
 {
- int width=0;
- char *s=int_string+usl;
- *s=0;
- while(i!=0 || width<int_width)
+ int width=0;                   /*the width or how many digits including prefixed zeros are printed*/
+ char *s=int_string+usl;        /*a pointer starting to the place where we will end the string with zero*/
+ *s=0;                          /*set the zero that terminates the string in the C language*/
+ while(i!=0 || width<int_width) /*loop to fill the string with every required digit plus prefixed zeros*/
  {
-  s--;
-  *s=i%radix;
-  i/=radix;
-  if(*s<10){*s+='0';}else{*s=*s+'A'-10;}
-  width++;
+  s--;                          /*decrement the pointer to go left for corrent digit placing*/
+  *s=i%radix;                   /*get the remainder of division by the radix or base*/
+  i/=radix;                     /*divide the input by radix*/
+  if(*s<10){*s+='0';}           /*fconvert digits 0 to 9 to the ASCII character for that digit*/
+  else{*s=*s+'A'-10;}           /*for digits higher than 9, convert to letters starting at A*/
+  width++;                      /*increment the width so we know when enough digits are saved*/
  }
-
- return s;
+ return s;                      /*return this string to be used by putstr,printf,std::cout or whatever*/
 }
 
 /**
@@ -88,7 +88,7 @@ char* intstr(unsigned int i)
  It's true purpose is to be used in the putint function for conveniently printing integers, 
  but it can print any valid string.
 
- @param s The  string to print
+ @param s The string to print
  @return void
 
  Example:
@@ -105,12 +105,14 @@ int main(int argc, char *argv[])
 
 */
 
-void putstring(const char *s)
+int putstring(const char *s)
 {
- int c=0;
- const char *p=s;
- while(*p++){c++;} 
- fwrite(s,1,c,stdout);
+ int count=0;              /*used to count how many bytes will be written*/
+ const char *p=s;          /*pointer used to find terminating zero of string*/
+ while(*p){p++;}           /*loop until zero found and immediately exit*/
+ count=p-s;                /*count is the difference of pointers p and s*/
+ fwrite(s,1,count,stdout); /*https://cppreference.com/w/c/io/fwrite.html*/
+ return count;             /*return how many bytes were written*/
 }
 
 /**
@@ -166,9 +168,8 @@ int main(int argc, char *argv[])
  return 0;
 }
  @endcode
-
-
 */
+
 void putint(unsigned int i)
 {
  putstring(intstr(i));
@@ -215,7 +216,8 @@ int strint(const char *s)
 {
  int i=0;
  char c;
- if( radix<2 || radix>36 ){printf("Error: radix %i is out of range!\n",radix);return i;}
+ strint_errors = 0; /*set zero errors before we parse the string*/
+ if( radix<2 || radix>36 ){ strint_errors++; printf("Error: radix %i is out of range!\n",radix);}
  while( *s == ' ' || *s == '\n' || *s == '\t' ){s++;} /*skip whitespace at beginning*/
  while(*s!=0)
  {
@@ -223,9 +225,9 @@ int strint(const char *s)
   if( c >= '0' && c <= '9' ){c-='0';}
   else if( c >= 'A' && c <= 'Z' ){c-='A';c+=10;}
   else if( c >= 'a' && c <= 'z' ){c-='a';c+=10;}
-  else if( c == ' ' || c == '\n' || c == '\t' ){return i;}
-  else{printf("Error: %c is not an alphanumeric character!\n",c);return i;}
-  if(c>=radix){printf("Error: %c is not a valid character for radix %i\n",*s,radix);return i;}
+  else if( c == ' ' || c == '\n' || c == '\t' ){break;}
+  else{ strint_errors++; printf("Error: %c is not an alphanumeric character!\n",*s);break;}
+  if(c>=radix){ strint_errors++; printf("Error: %c is not a valid character for radix %i\n",*s,radix);break;}
   i*=radix;
   i+=c;
   s++;

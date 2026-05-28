@@ -51,7 +51,10 @@ char *intstr(unsigned int i)    /*Chastity's supreme integer to string conversio
 
 
 /*
- This function prints a string using fwrite.
+ putstring: system call edition
+ This function prints a string using the write POSIX system call.
+ This changes only one line from the C fwrite function to the standard Unix write call
+ 
  This algorithm is the best C representation of how my Assembly programs also work.
  Its true purpose is to be used in the putint function for conveniently printing integers, 
  but it can print any valid string.
@@ -59,12 +62,12 @@ char *intstr(unsigned int i)    /*Chastity's supreme integer to string conversio
 
 int putstring(const char *s)
 {
- int count=0;              /*used to calcular how many bytes will be written*/
- const char *p=s;          /*pointer used to find terminating zero of string*/
- while(*p){p++;}           /*loop until zero found and immediately exit*/
- count=p-s;                /*count is the difference of pointers p and s*/
- write(1,s,count);         /*the unix system call way of writing the bytes*/
- return count;             /*return how many bytes were written*/
+ int count=0;      /*used to count how many bytes will be written*/
+ const char *p=s;  /*pointer used to find terminating zero of string*/
+ while(*p){p++;}   /*loop until zero found and immediately exit*/
+ count=p-s;        /*count is the difference of pointers p and s*/
+ write(1,s,count); /*the unix system call way of writing the bytes*/
+ return count;     /*return how many bytes were written*/
 }
 
 /*
