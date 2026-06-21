@@ -9,4 +9,4 @@
 
 ## Why is this function better or worse than alternatives?
 
-## How is this function built from other functions and code?
+## How can you use it?
