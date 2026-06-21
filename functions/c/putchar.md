@@ -4,7 +4,7 @@
 
 ## What does this function do?
 
-Writes 1 character to standard output (terminal or redirected to file)
+Writes 1 character to standard output (terminal or redirected to file).
 
 ## When would you use this function?
 
@@ -21,3 +21,32 @@ putchar is simpler to use than printf and only requires one argument: the charac
 
 ## How can you use it?
 
+Here is a complete program using putchar that writes all the printable characters to the terminal using a loop. It then prints a new line character with the escape sequence `'\n'`.
+
+```
+#include <stdio.h>
+
+int main(int argc, char *argv[])
+{
+ int a=0x20,b=0x7F;
+
+ while(a<b)
+ {
+  putchar(a);
+  a+=1;
+ }
+ putchar('\n');
+    
+ return 0;
+}
+```
+
+### Compile and run
+
+`gcc -Wall -ansi -pedantic main.c -o main && ./main`
+
+### Output
+
+```
+ !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+```
