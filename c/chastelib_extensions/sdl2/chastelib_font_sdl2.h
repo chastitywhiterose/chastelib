@@ -292,6 +292,35 @@ int sdl_putchar_pixel(char c) /*direct pixel access edition for SDL2*/
  return c;
 }
 
+/*
+frames per second is global so that different animations can change the speed
+*/
+int fps=60; /*frames per second*/
+
+/*
+a function which calls another putchar function to render a character
+but does a clever timing delay.
+*/
+int sdl_putchar_slow(char c)
+{
+ int sdl_time,sdl_time1; /*define the timing integers*/
+ int delay=1000/fps;
+ 
+ sdl_time = SDL_GetTicks(); /*get the current time in milliseconds*/
+ sdl_time1 = sdl_time+delay; /*make copy of time with delay added*/
+ 
+ sdl_putchar_pixel(c);
+ SDL_UpdateWindowSurface(window); /*update window to show the results*/
+ 
+ /*time loop used to slow the game down so users can see it*/
+ while(sdl_time<sdl_time1)
+ {
+  sdl_time=SDL_GetTicks();
+ }
+ 
+ return c;
+}
+
 int (*sdl_putchar)(char )=sdl_putchar_pixel;
 
 /*
@@ -312,6 +341,24 @@ int sdl_putstring(const char *s)
  count=p-s;                      /*count is the difference of pointers p and s*/
  fwrite(s,1,count,stdout);       /*https://cppreference.com/w/c/io/fwrite.html*/
  return count;                   /*return how many bytes were written*/
+}
+
+/*
+A function to clear the screen and reset the cursor to the top left
+This makes sense because the Linux clear command does the same thing
+*/
+
+void sdl_clear()
+{
+ cursor_x=0;cursor_y=0;
+ SDL_FillRect(surface,NULL,0x000000);
+ 
+ /*
+ these next lines use escape sequences to also clear the terminal
+ and reset the terminal cursor so it matches the SDL cursor by this library
+*/
+ putstring("\x1B[2J"); /*clear the terminal with an escape sequence*/
+ putstring("\x1B[H"); /*reset terminal cursor to home*/
 }
 
 /*
@@ -341,6 +388,10 @@ int sdl_putstring_wrapped(const char *s)
    cursor_y+=line_spacing_pixels; /*add space between lines for readability*/
    putchar('\n'); /*insert newline to terminal*/
   }
+  if(cursor_y+main_font.char_height*main_font.char_scale>=height)
+  {
+   sdl_clear(); /*call the function that clears the screen and resets the cursor x and y to 0;*/
+  }
   sdl_putchar(*p); /*print this character to the SDL window using a function I wrote*/
   putchar(*p);     /*print to stdout with libc putchar*/
   p++;             /*increment the pointer*/
@@ -349,23 +400,7 @@ int sdl_putstring_wrapped(const char *s)
  return count;                   /*return how many bytes were written*/
 }
 
-/*
-A function to clear the screen and reset the cursor to the top left
-This makes sense because the Linux clear command does the same thing
-*/
 
-void sdl_clear()
-{
- cursor_x=0;cursor_y=0;
- SDL_FillRect(surface,NULL,0x000000);
- 
- /*
- these next lines use escape sequences to also clear the terminal
- and reset the terminal cursor so it matches the SDL cursor by this library
-*/
- putstring("\x1B[2J"); /*clear the terminal with an escape sequence*/
- putstring("\x1B[H"); /*reset terminal cursor to home*/
-}
 
 /*
  a function with a loop which will only end if we click the X or press escape
