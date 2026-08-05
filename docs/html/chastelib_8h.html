@@ -105,6 +105,8 @@ Variables</h2></td></tr>
 <tr class="separator:aa059232cb80d0a918bf286acc99f4323"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1a38d42013bfd78914c9187e5b0ccdd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chastelib_8h.html#aa1a38d42013bfd78914c9187e5b0ccdd">int_width</a> =1</td></tr>
 <tr class="separator:aa1a38d42013bfd78914c9187e5b0ccdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e1b2b158a541813f5e26febd1aa0eb9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="chastelib_8h.html#a1e1b2b158a541813f5e26febd1aa0eb9">strint_errors</a> = 0</td></tr>
+<tr class="separator:a1e1b2b158a541813f5e26febd1aa0eb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >This file is a library of functions written by Chastity White Rose. The functions are for converting strings into integers and integers into strings. I did it partly for future programming plans and also because it helped me learn a lot in the process about how pointers work as well as which features the standard library provides and which things I need to write my own functions for.</p>
@@ -244,7 +246,7 @@ Variables</h2></td></tr>
 <div class="line">}</div>
 <div class="ttc" id="achastelib_8h_html_a3b535b19056dc40e454d544ad85a3fc4"><div class="ttname"><a href="chastelib_8h.html#a3b535b19056dc40e454d544ad85a3fc4">putstring</a></div><div class="ttdeci">int putstring(const char *s)</div><div class="ttdoc">print a string to stdout</div><div class="ttdef"><b>Definition:</b> chastelib.h:108</div></div>
 <div class="ttc" id="achastelib_8h_html_acdc6a90c7aec7aa29b023155e49f92b3"><div class="ttname"><a href="chastelib_8h.html#acdc6a90c7aec7aa29b023155e49f92b3">putint</a></div><div class="ttdeci">void putint(unsigned int i)</div><div class="ttdoc">print integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:173</div></div>
-<div class="ttc" id="achastelib_8h_html_adc198a1dd63a4aaf2a0358c73c7f1140"><div class="ttname"><a href="chastelib_8h.html#adc198a1dd63a4aaf2a0358c73c7f1140">strint</a></div><div class="ttdeci">int strint(const char *s)</div><div class="ttdoc">convert string into integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:215</div></div>
+<div class="ttc" id="achastelib_8h_html_adc198a1dd63a4aaf2a0358c73c7f1140"><div class="ttname"><a href="chastelib_8h.html#adc198a1dd63a4aaf2a0358c73c7f1140">strint</a></div><div class="ttdeci">int strint(const char *s)</div><div class="ttdoc">convert string into integer using global radix</div><div class="ttdef"><b>Definition:</b> chastelib.h:229</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -375,6 +377,23 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >radix or base for integer output. 2=binary, 8=octal, 10=decimal, 16=hexadecimal, or anything 2 to 36 </p>
+
+</div>
+</div>
+<a id="a1e1b2b158a541813f5e26febd1aa0eb9" name="a1e1b2b158a541813f5e26febd1aa0eb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e1b2b158a541813f5e26febd1aa0eb9">&#9670;&nbsp;</a></span>strint_errors</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int strint_errors = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >The strint_errors variable is used to keep track of how many errors happened in the strint function. The following errors can occur:</p>
+<p >Radix is not in range 2 to 36 Character is not a number 0 to 9 or alphabet A to Z (in either case) Character is alphanumeric but is not valid for current radix</p>
+<p >If any of these errors happen, error messages are printed to let the programmer or user know what went wrong in the string that was passed to the function. If getting input from the keyboard, the strint_errors variable can be used in a conditional statement to tell them to try again and recall the code that grabs user input. </p>
 
 </div>
 </div>
