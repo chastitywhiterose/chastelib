@@ -69,10 +69,10 @@ char *intstr(unsigned int i)    /*Chastity's supreme integer to string conversio
  *s=0;                          /*set the zero that terminates the string in the C language*/
  while(i!=0 || width<int_width) /*loop to fill the string with every required digit plus prefixed zeros*/
  {
-  s--;                          /*decrement the pointer to go left for corrent digit placing*/
+  s--;                          /*decrement the pointer to go left for correct digit placing*/
   *s=i%radix;                   /*get the remainder of division by the radix or base*/
   i/=radix;                     /*divide the input by radix*/
-  if(*s<10){*s+='0';}           /*fconvert digits 0 to 9 to the ASCII character for that digit*/
+  if(*s<10){*s+='0';}           /*convert digits 0 to 9 to the ASCII character for that digit*/
   else{*s=*s+'A'-10;}           /*for digits higher than 9, convert to letters starting at A*/
   width++;                      /*increment the width so we know when enough digits are saved*/
  }
@@ -174,6 +174,20 @@ void putint(unsigned int i)
 {
  putstring(intstr(i));
 }
+
+/**
+The strint_errors variable is used to keep track of how many errors happened in the strint function.
+The following errors can occur:
+
+Radix is not in range 2 to 36
+Character is not a number 0 to 9 or alphabet A to Z (in either case)
+Character is alphanumeric but is not valid for current radix
+
+If any of these errors happen, error messages are printed to let the programmer or user know what went wrong in the string that was passed to the function.
+If getting input from the keyboard, the strint_errors variable can be used in a conditional statement to tell them to try again and recall the code that grabs user input.
+*/
+
+int strint_errors = 0; 
 
 /**
  @brief convert string into integer using global radix
