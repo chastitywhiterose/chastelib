@@ -13,16 +13,21 @@
  a new api integer and setting its value with a regular integer
 */
 
-int init_length=0x100; /*the default length for new integers allocated*/
+/*
+ the default length for new integers allocated
+ can be increased by the main program to allocate more digits
+*/
+int init_length=0x100;
 
 /*
 Arbitrary Precision Integer structure
 */
 struct api_t
 {
- char *digits; /*pointer to an array of dynamically allocated of bytes*/
- int length,x;  /*current number of digits used*/
- int length_max;  /*current number of digits used*/
+ char *digits;   /*pointer to an array of dynamically allocated of bytes*/
+ int length,x;   /*current number of digits used*/
+ int length_max; /*maximum number of digits used*/
+ int signbit;    /*used to fake negative numbers in subtraction*/
 };
 
 /*
@@ -56,6 +61,8 @@ struct api_t* api_new()
  a->length=1;
  /*set lowest digit to 0*/
  a->digits[0]=0;
+ /*set signbit to 0 meaning positive or unsigned*/
+ a->signbit=0;
  /*return this pointer to the calling function*/
  return a;
 }
@@ -68,14 +75,26 @@ void api_delete(struct api_t *a)
  free(a);
 }
 
+/*
+ print all the digits of the api integer
+ with a leading - if the signbit is set
+*/
 void put_api(struct api_t *a)
 {
- int x=a->length;
+ int x;
+
+ if(a->signbit)
+ {
+  putstr("-");
+ }
+
+ x=a->length;
  while(x>0)
  {
   x--;
   putint(a->digits[x]);
  }
+
 }
 
 void put_api_reverse(struct api_t *a)
@@ -143,7 +162,7 @@ void api_mov(struct api_t *a,struct api_t *b)
 void api_add(struct api_t *a,struct api_t *b)
 {
  int x=0,y=0;
- while(x<b->length)
+ while(x<a->length)
  {
   y+=a->digits[x];
   y+=b->digits[x];
@@ -169,32 +188,118 @@ void api_add(struct api_t *a,struct api_t *b)
  this function fails miserably if you subtract
  a larger number from a smaller number
  negative numbers are not part of this library
+ but are simulated with a signbit field in the api struct
 */
 int api_sub(struct api_t *a,struct api_t *b)
 {
  int x=0,y=0;
- while(x<b->length)
+ api t; /*temporary variable in case something goes horribly wrong!*/
+ t=api_new();  /*allocate temp int*/
+ api_mov(t,a); /*make copy of a*/
+
+ while(x<a->length)
  {
-  y=a->digits[x];
+  y=a->digits[x]-y;
   y-=b->digits[x];
 
   /*printf("y=%d\n",y);*/
   /*if negative y, borrow from next digit*/
   if(y<0)
   {
-   a->digits[x+1]--;
    y+=radix;
+   a->digits[x]=y;
+   y=1;
+  }
+  else
+  {
+   a->digits[x]=y;
+   y=0;
   }
 
-  a->digits[x]=y;
   x++;
  }
 
- if(a->digits[x]!=0)
+ /*reduce length by excluding leading zero digits*/
+ while(a->digits[x-1]==0)
  {
-  printf("subtraction failure: bigger number subtracted from smaller number\n");
-  return 1; /*an error has occurred*/
+  x--;
+ }
+ a->length=x;
+
+ /*
+  if b is greater than a, it results in negative number
+  we subtract original a from b to get the difference
+  and then flip the sign bit
+ */
+ if(y!=0)
+ {
+  putstr("Warning: signbit changed to 1 for negative number.\n");
+  a->signbit=1;
+  api_mov(a,b);
+  api_sub(a,t);
  }
 
- return 0; /*if no errors, return 0*/
+ api_delete(t);
+
+ return a->signbit;
 }
+
+
+
+
+
+
+
+
+/*
+ a=a*b
+ each api integer has its own index variable
+ i is used as product and carry variable
+ c integer destination is dynamically created and 
+ then copied to a and deleted
+*/
+void api_mul(struct api_t *a,struct api_t *b)
+{
+ int i,ax,bx,cx;
+
+ api c; /*temporary variable in case something goes horribly wrong!*/
+ c=api_new(); /*allocate temp int*/
+
+ /*all digits of c must be initialized o 0*/
+ cx=0;
+ while(cx<c->length_max)
+ {
+  c->digits[cx]=0;
+  cx++;
+ }
+
+ /*
+  multiply the a and b arrays together and store the result
+  in the c array
+ */
+  bx=0;
+  while(bx<b->length)/*multiplication code begin*/
+  {
+   ax=0;
+   while(ax<a->length)
+   {
+    i=a->digits[ax]*b->digits[bx];
+    cx=ax+bx; 
+    while(cx<c->length_max && i>0)
+    {
+     c->digits[cx]+=i;
+     i=c->digits[cx]/radix;
+     c->digits[cx]%=radix;
+     cx++;
+     if(cx>c->length){c->length=cx;}
+    }
+    ax++;
+   }
+   bx++;
+
+  } /*multiplication code end*/
+
+ api_mov(a,c);
+ api_delete(c);
+}
+
