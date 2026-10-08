@@ -5,40 +5,39 @@
 
 int main(int argc, char *argv[])
 {
- api a,b,c,d;
+ int x,y;
+ api a,b,c;
 
  radix=10;
  int_width=1;
 
  putstr("chastelib Arbitrary Precision Integer demo:\n");
- putstr("dividing api integers\n");
+ putstr("comparing api integers\n");
 
  a=api_new();
  b=api_new();
  c=api_new();
- d=api_new();
 
-
- api_set_ui(a,65536);
- api_set_ui(b,100);
+ api_set_ui(a,0);
+ api_set_ui(b,8);
  api_set_ui(c,1);
 
- api_mov(c,a);
- api_mov(d,a);
 
- api_div(c,b);
- api_rem(d,b);
-
- put_api(a); putstr("\n");
- put_api(b); putstr("\n");
- put_api(c); putstr("\n");
- put_api(d); putstr("\n");
- 
+ x=0;
+ while(x<16)
+ {
+  put_api(a); 
+  putstr(" api_cmp=");
+  y=api_cmp(a,b);
+  putint(y);
+  putstr("\n");
+  api_add(a,c);
+  x++;
+ }
 
  api_delete(a);
  api_delete(b);
  api_delete(c);
- api_delete(d);
 
  return 0;
 }

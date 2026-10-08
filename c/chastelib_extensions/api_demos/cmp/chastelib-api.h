@@ -220,7 +220,7 @@ int api_sub(struct api_t *a,struct api_t *b)
  }
 
  /*reduce length by excluding leading zero digits*/
- while(a->digits[x-1]==0 && x>1)
+ while(a->digits[x-1]==0)
  {
   x--;
  }
@@ -318,14 +318,7 @@ void api_shl(struct api_t *a)
   a->digits[x+1]=a->digits[x];
  }
  a->digits[x]=0;
- /*
-  if the digit at length index is not zero
-  then we expand this integer by 1 digit
- */
- if(a->digits[a->length]!=0)
- {
-  a->length++;
- }
+ a->length++;
 }
 
 
@@ -355,7 +348,7 @@ int api_cmp(struct api_t *a,struct api_t *b)
  {
   y=-1;
  }
- else if(a->length > b->length)
+ else if (a->length > b->length)
  {
   y=1;
  }
@@ -374,151 +367,13 @@ int api_cmp(struct api_t *a,struct api_t *b)
    if(a->digits[x] < b->digits[x])
    {
     y=-1;
-    break;
    }
    if(a->digits[x] > b->digits[x])
    {
     y=1;
-    break;
    }
   }
  }
  return y;
 }
 
-
-/*
- divide a by b and store quotient in a
-*/
-void api_div(struct api_t *a,struct api_t *b)
-{
- int x,ax,cmp;
-
- api q; /*quotient*/
- api r; /*remainder*/
- q=api_new(); /*allocate quotient*/
- r=api_new(); /*allocate remainder*/
-
- /*all digits of q and r must be initialized o 0*/
- x=0;
- while(x<q->length_max)
- {
-  q->digits[x]=0;
-  r->digits[x]=0;
-  x++;
- }
-
-  /*division code begin*/
-  ax=a->length;
-  while(ax>0)
-  {
-   ax--;
- 
-   /*
-    left shift remainder by radix
-    and place next digit from a
-    as lowest digit of remainder
-   */
-   api_shl(r);
-   r->digits[0]=a->digits[ax];
-
-   x=0; /*used to be next quotient digit*/
-   /*
-    while the remainder is greater or equal to b
-    subtract b from r
-    keep track of how many times with i
-   */
-   while(1)
-   {
-    cmp=api_cmp(r,b);
-    if(cmp==-1)
-    {
-     break;
-    }
-    api_sub(r,b);
-    x++;
-   }
-   /*
-    left shift quotient by radix
-    and place next digit from i
-    as lowest digit of quotient
-   */
-   api_shl(q);
-   q->digits[0]=x;
- 
-  }
-  /*division code end*/
-
- api_mov(a,q);
- api_delete(q);
- api_delete(r);
-}
-
-/*
- divide a by b and store remainder in a
- this function is identical to api_div
- except that it copies remainder instead of quotient
-*/
-void api_rem(struct api_t *a,struct api_t *b)
-{
- int x,ax,cmp;
-
- api q; /*quotient*/
- api r; /*remainder*/
- q=api_new(); /*allocate quotient*/
- r=api_new(); /*allocate remainder*/
-
- /*all digits of q and r must be initialized o 0*/
- x=0;
- while(x<q->length_max)
- {
-  q->digits[x]=0;
-  r->digits[x]=0;
-  x++;
- }
-
-  /*division code begin*/
-  ax=a->length;
-  while(ax>0)
-  {
-   ax--;
- 
-   /*
-    left shift remainder by radix
-    and place next digit from a
-    as lowest digit of remainder
-   */
-   api_shl(r);
-   r->digits[0]=a->digits[ax];
-
-   x=0; /*used to be next quotient digit*/
-   /*
-    while the remainder is greater or equal to b
-    subtract b from r
-    keep track of how many times with i
-   */
-   while(1)
-   {
-    cmp=api_cmp(r,b);
-    if(cmp==-1)
-    {
-     break;
-    }
-    api_sub(r,b);
-    x++;
-   }
-   /*
-    left shift quotient by radix
-    and place next digit from i
-    as lowest digit of quotient
-   */
-   api_shl(q);
-   q->digits[0]=x;
- 
-  }
-  /*division code end*/
-
- api_mov(a,r);
- api_delete(q);
- api_delete(r);
-}
