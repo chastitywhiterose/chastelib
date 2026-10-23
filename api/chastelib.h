@@ -89,7 +89,7 @@ char *intstr(unsigned int i)    /*Chastity's supreme integer to string conversio
  but it can print any valid string.
 
  @param s The string to print
- @return void
+ @return the count of characters printed from the string
 
  Example:
  @code
@@ -114,6 +114,18 @@ int putstring(const char *s)
  fwrite(s,1,count,stdout); /*https://cppreference.com/w/c/io/fwrite.html*/
  return count;             /*return how many bytes were written*/
 }
+
+/**
+ A function pointer named putstr which is a shorter name for calling putstring
+ But this doesn't exist just to save bytes of source files. Otherwise I wouldn't have these huge comments!
+ This exists so that all strings can be redirected to another function for output.
+ For example, if the strings were written to a log file during a game which didn't use a terminal.
+ 
+ But the most common use case is "putstr=addstr" when using the ncurses library to manage
+ terminal control functions for a text based game. Having the putstr pointer allows me to 
+ include this same source file and use it for ncurses based projects.
+*/
+int (*putstr)(const char *)=putstring;
 
 /**
  @brief print integer using global radix
@@ -172,7 +184,7 @@ int main(int argc, char *argv[])
 
 void putint(unsigned int i)
 {
- putstring(intstr(i));
+ putstr(intstr(i));
 }
 
 /**

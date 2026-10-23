@@ -1,6 +1,5 @@
 # function
 
-
 ## What does this function do?
 
 ## When would you use this function?
